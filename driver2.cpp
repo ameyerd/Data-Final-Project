@@ -17,7 +17,6 @@ int main(int argc, char* argv[])
   string bday;
   string height;
   string fact;
-  cout << "hello" << endl;
   if (fp.is_open())
   {
     while (getline(fp,s))
