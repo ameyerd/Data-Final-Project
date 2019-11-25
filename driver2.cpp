@@ -20,7 +20,6 @@ int main(int argc, char* argv[])
   cout << "hello" << endl;
   if (fp.is_open())
   {
-    cout << "hi" << endl;
     while (getline(fp,s))
     {
 
@@ -39,7 +38,7 @@ int main(int argc, char* argv[])
 
   else
   {
-    cout << "not title" << endl;
+    cout << "File does not exist." << endl;
     return 0;
   }
   cout << "---------------------------------------------------------------" << endl;
