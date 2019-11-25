@@ -8,6 +8,10 @@ bool toLowerdouble(string input, string compare)
 {
     string output = "";
     string check ="";
+    if (input.length() != compare.length())
+    {
+        return false;
+    }
     for (int i =1; i < input.length(); i++)
     {
         output += tolower(input[i]);
