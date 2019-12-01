@@ -49,6 +49,7 @@ public:
 
     void printTable();
     void printMembers();
+    void printIndividual();
 
     group* searchGroup(string groupName);
 };
