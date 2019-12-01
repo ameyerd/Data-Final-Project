@@ -45,6 +45,38 @@ HashTable::HashTable(int bsize)
     for(int i=0;i<bsize;i++)
         table[i] = nullptr;
 }
+//Deconstructor
+HashTable::~HashTable()
+{
+
+  for (int i = 0; i < tableSize; i++)
+  {
+    group* n = table[i];
+    group* temp;
+    member* pres;
+    while (n != NULL)
+    {
+      //cout << "Group-" << n->groupName << " ";
+      while (n->head != NULL)
+      {
+        pres = n->head;
+        n->head = pres->n;
+        //cout << "Deleting: "<< pres->memberName << " -->";
+        delete pres;
+      }
+
+      temp = n;
+      n = n->next;
+      //cout << "now delete group: " << temp->groupName<< endl;
+      delete temp;
+
+    }
+
+  }
+
+  tableSize = 0;
+
+}
 
 //function to calculate hash function
 unsigned int HashTable::hashFunction(string groupName)
