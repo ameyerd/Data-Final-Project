@@ -40,7 +40,7 @@ class HashTable
     group* createGroup(string groupName, group* next);
 public:
     HashTable(int bsize);  // Constructor
-
+    ~HashTable();
     // inserts a key into hash table
     bool insertGroup(string groupName,string memberName, string position, string birthday, string height, string fact);
 
