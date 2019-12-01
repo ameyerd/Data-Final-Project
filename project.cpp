@@ -217,7 +217,7 @@ void HashTable::printMembers(string groupN)
       cout << endl;
 }
 
-void HashTable:: printIndividual(string memberN)
+void HashTable::printIndividual(string memberN)
 {
 
   for (int i =0; i < tableSize; i++)
