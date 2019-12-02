@@ -3,6 +3,28 @@
 #include "project.hpp"
 
 using namespace std;
+// this function is for case-sensitive input from the user
+bool toLowerdouble(string input, string compare)
+{
+    string output = "";
+    string check ="";
+    if (input.length() != compare.length())
+    {
+      return false;
+    }
+    for (int i =1; i < input.length(); i++)
+    {
+        output += tolower(input[i]);
+        check += tolower(compare[i]);
+    }
+
+    if (check == output)
+    {
+      return true;
+    }
+
+    return false;
+}
 
 //destrucutor?
 
@@ -23,6 +45,40 @@ HashTable::HashTable(int bsize)
     for(int i=0;i<bsize;i++)
         table[i] = nullptr;
 }
+//Decontructor
+HashTable::~HashTable()
+{
+
+  for (int i = 0; i < tableSize; i++)
+  {
+    group* n = table[i];
+    group* temp;
+    member* pres;
+    while (n != NULL)
+    {
+      //cout << "Group-" << n->groupName << " ";
+      while (n->head != NULL)
+      {
+        pres = n->head;
+        n->head = pres->n;
+        //cout << "Deleting: "<< pres->memberName << " -->";
+        delete pres;
+      }
+
+      temp = n;
+      n = n->next;
+      //cout << "now delete group: " << temp->groupName<< endl;
+      delete temp;
+
+    }
+
+  }
+
+  tableSize = 0;
+
+
+
+}
 
 //function to calculate hash function
 unsigned int HashTable::hashFunction(string groupName)
@@ -42,7 +98,7 @@ group* HashTable::searchGroup(string groupName)
     tmp = table[index];
     while(tmp != NULL)
     {
-      if(tmp->groupName == groupName)
+      if(toLowerdouble(groupName, tmp->groupName) == true)
       {
         return tmp;
       }
@@ -139,14 +195,11 @@ void HashTable::printTable()
   }
 }
 
-void HashTable::printMembers()
+void HashTable::printMembers(string groupN)
 {
-  for (int i =0; i < tableSize; i++)
-  {
-    group* n = table[i];
 
-    while(n != NULL)
-    {
+    group* n = searchGroup(groupN);
+
       cout << n->groupName << ": ";
       member* m = n->head;
       while (m != NULL)
@@ -163,8 +216,39 @@ void HashTable::printMembers()
         m = m->n;
       }
 
+      cout << endl;
+}
+
+void HashTable:: printIndividual(string memberN)
+{
+
+  for (int i =0; i < tableSize; i++)
+  {
+    group* n = table[i];
+
+    while(n != NULL)
+    {
+      member* m = n->head;
+      while (m != NULL)
+      {
+        if (toLowerdouble(memberN, m->memberName) == true)
+        {
+          cout << "Group: "<< n->groupName << endl;
+          cout << "Name: " << m->memberName << endl;
+          cout << "Position: " << m->position << endl;
+          cout << "Birthday: " << m->birthday << endl;
+          cout << "Height: " << m->height << endl;
+          cout << "Fun Fact: " << m->fact << endl;
+          return;
+        }
+
+        m = m->n;
+      }
+
       n = n->next;
       cout << endl;
     }
   }
+
+  cout << "Idol not Found." << endl;
 }
