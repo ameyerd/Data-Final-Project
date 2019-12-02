@@ -41,6 +41,7 @@ class HashTable
 public:
     HashTable(int bsize);  // Constructor
 
+    ~HashTable();
     // inserts a key into hash table
     bool insertGroup(string groupName,string memberName, string position, string birthday, string height, string fact);
 
@@ -48,9 +49,11 @@ public:
     unsigned int hashFunction(string groupName);
 
     void printTable();
-    void printMembers();
+    void printMembers(string GroupN);
 
     group* searchGroup(string groupName);
+    void printIndividual(string memberN);
 };
 
 #endif
+
