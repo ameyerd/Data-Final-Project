@@ -2,6 +2,7 @@
 #define HASH_HPP
 
 #include <string>
+#include <vector>
 
 
 using namespace std;
@@ -38,6 +39,9 @@ class HashTable
     group* *table;
 
     group* createGroup(string groupName, group* next);
+
+    vector<string> favoriteGroup;
+    vector<string> favoriteMember;
 public:
     HashTable(int bsize);  // Constructor
 
@@ -49,11 +53,49 @@ public:
     unsigned int hashFunction(string groupName);
 
     void printTable();
+    void printGroups();
     void printMembers(string GroupN);
 
     group* searchGroup(string groupName);
     void printIndividual(string memberN);
+
+    void addFavGroup(int rank, string groupName);
+    void addFavMember(int rank, string memberName);
+    // WWE NEED DELETE FUNCTION
+
+
 };
 
-#endif
+//favorite struct
+// struct bubble {
+//   int rank;
+//   string groupFavN;
+//   string memberFavN;
+// };
+//
+// class user
+// {
+//   public:
+//     user (int cap);
+//     ~user();
+//
+//     //heap functions
+//     int parent(int i);
+//     int right(int i);
+//
+//     void printSelect(int i);
+//     void printAll();
+//     void heapify(int i);
+//     void insertFavGroup(int rank, string groupFavN, string memberFavN);
+//     void deleteFavGroup(int rank);
+//   private:
+//     string username;
+//     //data type
+//
+//     //heap
+//     int *heapArr;
+//     int capacity;
+//     int currentSize;
+// }
 
+#endif
