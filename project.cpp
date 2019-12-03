@@ -10,7 +10,7 @@ bool toLowerdouble(string input, string compare)
     string check ="";
     if (input.length() != compare.length())
     {
-        return false;
+      return false;
     }
     for (int i =1; i < input.length(); i++)
     {
@@ -45,7 +45,7 @@ HashTable::HashTable(int bsize)
     for(int i=0;i<bsize;i++)
         table[i] = nullptr;
 }
-//Deconstructor
+//Decontructor
 HashTable::~HashTable()
 {
 
@@ -75,6 +75,8 @@ HashTable::~HashTable()
   }
 
   tableSize = 0;
+
+
 
 }
 
@@ -217,7 +219,7 @@ void HashTable::printMembers(string groupN)
       cout << endl;
 }
 
-void HashTable::printIndividual(string memberN)
+void HashTable:: printIndividual(string memberN)
 {
 
   for (int i =0; i < tableSize; i++)
@@ -249,4 +251,31 @@ void HashTable::printIndividual(string memberN)
   }
 
   cout << "Idol not Found." << endl;
+}
+
+void HashTable::addFavGroup(int rank, string groupName)
+{
+
+  // //first check if group exists
+
+  if(rank == favoriteGroup.size()+1)
+  {
+    favoriteGroup.push_back(groupName);
+  }
+
+  else if(favoriteGroup.size() == 0)
+  {
+    favoriteGroup.push_back(groupName);
+  }
+
+  else
+  {
+    favoriteGroup.insert(favoriteGroup.begin()+rank-1, groupName);
+  }
+  cout <<"Rank" << endl;
+  for (int i =0; i < favoriteGroup.size(); i++)
+  {
+    cout << i +1 << ". " << favoriteGroup[i] << endl;
+  }
+
 }
