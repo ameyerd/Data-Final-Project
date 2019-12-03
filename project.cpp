@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <iomanip>
 #include "project.hpp"
 
 using namespace std;
@@ -195,6 +196,38 @@ void HashTable::printTable()
   }
 }
 
+void HashTable::printGroups()
+{
+  int j =0;
+  for(int i = 0; i < tableSize; i++)
+  {
+    group* n = table[i];
+    while(n != NULL)
+    {
+      // if(n->next == NULL)
+      // {
+      //   cout << n->groupName;
+      // }
+      // else
+      // {
+        if (j ==3)
+        {
+          cout << left << setw(20) << n->groupName << endl;
+          j =0;
+        }
+        else
+        {
+          cout << right << setw(20) << n->groupName << " ミ✭ ";
+          j++;
+        }
+      // }
+      n = n->next;
+    }
+
+  }
+  cout << endl;
+}
+
 void HashTable::printMembers(string groupN)
 {
 
@@ -251,4 +284,86 @@ void HashTable:: printIndividual(string memberN)
   }
 
   cout << "Idol not Found." << endl;
+}
+
+void HashTable::addFavGroup(int rank, string groupName)
+{
+
+  // //first check if group exists
+  group* temp = searchGroup(groupName);
+  if(!searchGroup(groupName))
+  {
+    cout << "Group doesn't exist." << endl;
+    return;
+  }
+
+  if(rank == favoriteGroup.size()+1)
+  {
+    favoriteGroup.push_back(temp->groupName);
+  }
+
+  else if(favoriteGroup.size() == 0)
+  {
+    favoriteGroup.push_back(temp->groupName);
+  }
+
+  else
+  {
+    favoriteGroup.insert(favoriteGroup.begin()+rank-1, temp->groupName);
+  }
+  cout <<"Rank" << endl;
+  for (int i =0; i < favoriteGroup.size(); i++)
+  {
+    cout << i +1 << ". " << favoriteGroup[i] << endl;
+  }
+
+}
+
+void HashTable::addFavMember(int rank, string memberName)
+{
+  for (int i =0; i < tableSize; i++)
+  {
+    group* n = table[i];
+
+    while(n != NULL)
+    {
+      member* m = n->head;
+      while (m != NULL)
+      {
+        if (toLowerdouble(memberName, m->memberName) == true)
+        {
+
+          if(rank == favoriteMember.size()+1)
+          {
+            favoriteMember.push_back(m->memberName);
+          }
+
+          else if(favoriteMember.size() == 0)
+          {
+            favoriteMember.push_back(m->memberName);
+          }
+
+          else
+          {
+            favoriteMember.insert(favoriteMember.begin()+rank-1, m->memberName);
+          }
+          cout <<"Rank" << endl;
+          for (int i =0; i < favoriteMember.size(); i++)
+          {
+            cout << i +1 << ". " << favoriteMember[i] << endl;
+          }
+
+
+          return;
+        }
+
+        m = m->n;
+      }
+
+      n = n->next;
+    }
+  }
+
+  cout << "Idol not Found." << endl;
+
 }
