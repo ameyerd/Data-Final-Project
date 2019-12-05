@@ -57,10 +57,12 @@ public:
     void printMembers(string GroupN);
 
     group* searchGroup(string groupName);
+    member* searchMember(string memberName);
     void printIndividual(string memberN);
 
     void addFavGroup(int rank, string groupName);
     void addFavMember(int rank, string memberName);
+    void quiz(string idolname);
     // WWE NEED DELETE FUNCTION
 
 
