@@ -2,12 +2,20 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <thread>
+#include <iomanip>
+#include <cmath>
+#include <cstdlib>
+#include <unistd.h>
+#include <stdio.h>
+#include <ctime>
 #include "project.hpp"
 
 using namespace std;
 
 int main(int argc, char* argv[])
 {
+
   HashTable ht (15);
   ifstream fp (argv[1]);
   string s;
@@ -41,21 +49,37 @@ int main(int argc, char* argv[])
     return 0;
   }
   cout << "---------------------------------------------------------------" << endl;
-  // ht.printMembers();
+  ht.printMembers("exo");
+  //std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+  ht.printMembers("txt");
+  //std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
   //ht.printTable();
   ht.printGroups();
 
-  ht.printIndividual("Mingi");
+  srand(time(0));
 
-  ht.addFavGroup(1, "NCT 127");
-  ht.addFavGroup(1, "Van");
-  ht.addFavGroup(2, "Twice");
-  ht.addFavGroup(3, "red velvet");
-  ht.addFavGroup(2, "day6");
+  ht.quiz("mingi");
+  ht.quiz("yeonjun");
 
-  ht.addFavMember(1, "yeri");
-  ht.addFavMember(2, "j-hope");
-  ht.addFavMember(1, "mark"); //this
-  ht.addFavMember(3, "joy");
 
+  //ht.printIndividual("yeri");
+  // ht.printIndividual("taeyong");
+  // ht.printIndividual("umji");
+  // ht.printIndividual("haechan");
+  // ht.printIndividual("amey");
+
+  //
+  // ht.addFavGroup(1, "NCT 127");
+  // ht.addFavGroup(1, "Van");
+  // ht.addFavGroup(2, "Twice");
+  // ht.addFavGroup(3, "red velvet");
+  // ht.addFavGroup(2, "day6");
+  //
+  // ht.addFavMember(1, "yeri");
+  // ht.addFavMember(2, "j-hope");
+  // ht.addFavMember(1, "mark"); //this
+  // ht.addFavMember(3, "joy");
+
+  return 0;
 }
