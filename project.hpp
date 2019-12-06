@@ -62,6 +62,11 @@ public:
 
     void addFavGroup(int rank, string groupName);
     void addFavMember(int rank, string memberName);
+    void deleteFavGroup(string groupname);
+    void deleteFavMember(string membername);
+    void printFavoriteGroup();
+    void printFavoriteMember();
+
     void quiz(string idolname);
     // WWE NEED DELETE FUNCTION
 
