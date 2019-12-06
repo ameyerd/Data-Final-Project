@@ -18,11 +18,13 @@ bool toLowerdouble(string input, string compare)
     {
       return false;
     }
-    for (int i =1; i < input.length(); i++)
+    for (int i =0; i < input.length(); i++)
     {
         output += tolower(input[i]);
         check += tolower(compare[i]);
     }
+
+    cout << output << " vs " << check << endl;
 
     if (check == output)
     {
@@ -169,7 +171,7 @@ bool HashTable::insertGroup(string groupName, string memberName, string position
     //need to insert 1st member here
 
     member *m = new member(memberName,position,birthday,height,fact);
-    cout << "Added: " << memberName << endl;
+    // cout << "Added: " << memberName << endl;
     hashElement->head = m;
 
     return true;
@@ -177,8 +179,8 @@ bool HashTable::insertGroup(string groupName, string memberName, string position
 
   else
   {
-    cout << "Group already exists..." << endl;
-    cout << "Checking members..." << endl;
+    // cout << "Group already exists..." << endl;
+    // cout << "Checking members..." << endl;
     //here add the rest of the memebrs
     //first we need to find the group
     // then we need to store the members head of the group into temp
@@ -192,9 +194,9 @@ bool HashTable::insertGroup(string groupName, string memberName, string position
     {
       if(membertemp->n == NULL)
       {
-        cout << "Adding member..." << endl;
+        // cout << "Adding member..." << endl;
         membertemp->n = new member(memberName,position,birthday,height,fact);
-        cout << "Added: " << memberName << endl;
+        // cout << "Added: " << memberName << endl;
         return true;
       }
 
@@ -266,30 +268,38 @@ void HashTable::printMembers(string groupN)
   cout<<endl;
   group* n = searchGroup(groupN);
 
-  cout << "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ⋆⋅☆⋅⋆ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀" << right << setw(56) << endl;
-  cout <<  n->groupName << right << setw(47)<< endl;
+  if(n)
+  {
+    cout << "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ⋆⋅☆⋅⋆ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀" << right << setw(56) << endl;
+    cout <<  n->groupName << right << setw(47)<< endl;
 
 
-      // cout << n->groupName << ": ";
-      member* m = n->head;
-      int counter = 0;
-      while (m != NULL)
-      {
-        if(counter == 1)
+        // cout << n->groupName << ": ";
+        member* m = n->head;
+        int counter = 0;
+        while (m != NULL)
         {
-          cout << " ♬♪ " << left << setw(10) << m->memberName <<  right << setw(47)<< endl;
-          counter = 0;
-        }
-        else
-        {
-          cout << " ♬♪ " << left << setw(10) << m->memberName;
-          counter++;
+          if(counter == 1)
+          {
+            cout << " ♬♪ " << left << setw(10) << m->memberName <<  right << setw(47)<< endl;
+            counter = 0;
+          }
+          else
+          {
+            cout << " ♬♪ " << left << setw(10) << m->memberName;
+            counter++;
+          }
+
+          m = m->n;
         }
 
-        m = m->n;
-      }
+        cout << endl;
+    }
+    else
+    {
+      cout << "Group doesn't exist." << endl;
+    }
 
-      cout << endl;
       //cout << "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ⋆⋅☆⋅⋆ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀" << endl;
 }
 
@@ -341,6 +351,13 @@ void HashTable::addFavGroup(int rank, string groupName)
     return;
   }
 
+  if (favoriteGroup.size() == 0 && rank != 1)
+  {
+    cout << "Oops! You do not have anything in here! We will put this at #1. Better Luck next time. Teehee" << endl;
+    favoriteGroup.push_back(temp->groupName);
+    return;
+  }
+
   if(rank == favoriteGroup.size()+1)
   {
     favoriteGroup.push_back(temp->groupName);
@@ -355,12 +372,20 @@ void HashTable::addFavGroup(int rank, string groupName)
   {
     favoriteGroup.insert(favoriteGroup.begin()+rank-1, temp->groupName);
   }
-  cout <<"Rank" << endl;
+
+}
+
+void HashTable::deleteFavGroup(string groupname)
+{
+
   for (int i =0; i < favoriteGroup.size(); i++)
   {
-    cout << i +1 << ". " << favoriteGroup[i] << endl;
+    if (toLowerdouble(groupname, favoriteGroup[i]))
+    {
+      favoriteGroup.erase(favoriteGroup.begin() + i);
+      break;
+    }
   }
-
 }
 
 void HashTable::addFavMember(int rank, string memberName)
@@ -391,11 +416,6 @@ void HashTable::addFavMember(int rank, string memberName)
           {
             favoriteMember.insert(favoriteMember.begin()+rank-1, m->memberName);
           }
-          cout <<"Rank" << endl;
-          for (int i =0; i < favoriteMember.size(); i++)
-          {
-            cout << i +1 << ". " << favoriteMember[i] << endl;
-          }
 
 
           return;
@@ -412,6 +432,34 @@ void HashTable::addFavMember(int rank, string memberName)
 
 }
 
+void HashTable::deleteFavMember(string membername)
+{
+  for (int i =0; i < favoriteMember.size(); i++)
+  {
+    if (toLowerdouble(membername, favoriteMember[i]))
+    {
+      favoriteMember.erase(favoriteMember.begin() + i);
+      break;
+    }
+  }
+}
+void HashTable:: printFavoriteMember()
+{
+  cout <<"Rank" << endl;
+  for (int i =0; i < favoriteMember.size(); i++)
+  {
+    cout << i +1 << ". " << favoriteMember[i] << endl;
+  }
+}
+
+void HashTable:: printFavoriteGroup()
+{
+  cout <<"Rank" << endl;
+  for (int i =0; i < favoriteGroup.size(); i++)
+  {
+    cout << i +1 << ". " << favoriteGroup[i] << endl;
+  }
+}
 //herlper function
 int randomizer(int num)
 {
