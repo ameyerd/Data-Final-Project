@@ -34,19 +34,19 @@ bool isnumber(string checking)
 
 void mainmenu()
 {
-  cout << "Select from the following" << endl;
-  cout << "-------------------------" << endl;
-  cout << "1. Display all groups" << endl; // printTable()
-  cout << "2. Display members from a group" << endl; // printMembers()
-  cout << "3. Search an idol" << endl; //printIndividual
-  cout << "4. Add favorite group" << endl;
-  cout << "5. Add favorite idol" << endl;
-  cout << "6. Delete a group from favorites" << endl;
-  cout << "7. Delete an idol from favorites" << endl;
-  cout << "8. Test your KNOWLEDGE" << endl;
-  cout << "9. See your GROUP RANKING" << endl;
-  cout << "10. See your IDOL RANKING" <<endl;
-  cout << "11. LOG OUT" << endl;
+  cout << "▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ M A I N  M E N U ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀" << right << setw(65) << endl;
+  cout << endl;
+  cout << "1. Display all groups" << right << setw(75) << endl; // printTable()
+  cout << "2. Display members from a group" << right << setw(61) <<endl; // printMembers()
+  cout << "3. Search an idol" << right << setw(65) <<endl; //printIndividual
+  cout << "4. Add favorite group" << right << setw(64) <<endl;
+  cout << "5. Add favorite idol" << right << setw(76) <<endl;
+  cout << "6. Delete a group from favorites" << right << setw(76) <<endl;
+  cout << "7. Delete an idol from favorites" << right << setw(66) <<endl;
+  cout << "8. Test your KNOWLEDGE" << right << setw(69) <<endl;
+  cout << "9. See your GROUP RANKING" << right << setw(69) <<endl;
+  cout << "10. See your IDOL RANKING" << right << setw(55) <<endl;
+  cout << "11. LOG OUT" <<endl;
 }
 
 int main(int argc, char* argv[])
@@ -89,12 +89,17 @@ int main(int argc, char* argv[])
     return 0;
   }
 
-  cout << "WELCOME TO KPOP POP" << endl;
+  cout << endl;
+  cout << endl;
+  cout << right << setw(105) << endl;
+
+  cout << " (=^･ｪ･^=))ﾉ彡☆ WELCOME TO KPOP POP (=^･ｪ･^=))ﾉ彡☆" << right << setw(67) << endl;
   cout << "Please insert your name: ";
   cin.ignore();
   getline(cin, username);
 
-
+  cout << endl;
+  cout << endl;
   while(choice != "11")
   {
     mainmenu();
@@ -106,6 +111,7 @@ int main(int argc, char* argv[])
         case 1:
           //print list of all groups
           ht.printGroups();
+          cout << endl;
           break;
         case 2:
           // print members from a group
@@ -113,6 +119,7 @@ int main(int argc, char* argv[])
           cin.ignore();
           getline(cin,groupN);
           ht.printMembers(groupN);
+          cout << endl;
           break;
         case 3:
           //search info oF an idol
@@ -131,6 +138,7 @@ int main(int argc, char* argv[])
             cout << "Here's your current favorite groups: " << endl;
           }
           ht.printFavoriteGroup();
+          cout << endl;
           cout << "Please insert your favorite group: ";
           cin.ignore();
           getline(cin,groupN);
@@ -145,7 +153,7 @@ int main(int argc, char* argv[])
               getline(cin,rank);
             }
           }
-
+          cout << endl;
           ht.addFavGroup(stoi(rank),groupN);
           if (ht.numofFavG () !=0 && ht.numofFavG() != track)
           {
@@ -153,6 +161,7 @@ int main(int argc, char* argv[])
             ht.printFavoriteGroup();
           }
 
+          cout << endl;
           break;
         case 5:
           //add favorite idol
@@ -176,6 +185,7 @@ int main(int argc, char* argv[])
               getline(cin,rank);
             }
           }
+          cout << endl;
           ht.addFavMember(stoi(rank),memberN);
           if (ht.numofFavM() != 0 && track != ht.numofFavM())
           {
@@ -183,6 +193,7 @@ int main(int argc, char* argv[])
               ht.printFavoriteMember();
           }
 
+          cout << endl;
 
           break;
         case 6:
@@ -192,10 +203,12 @@ int main(int argc, char* argv[])
           {
             cout << "Here's your current favorite groups: " << endl;
             ht.printFavoriteGroup();
+            cout << endl;
           }
           else
           {
             cout << "You currently have no favorite group to delete!" << endl;
+            cout << endl;
             break;
           }
 
@@ -208,11 +221,13 @@ int main(int argc, char* argv[])
           {
             cout << "Yay! Here's the updated list of your current favorite group(s)!" << endl;
             ht.printFavoriteGroup();
+
           }
-          else
+          else if(ht.numofFavG() == 0)
           {
             cout << "You deleted EVERYTHING!!!!!" << endl;
           }
+          cout << endl;
           break;
         case 7:
           //delete idol from favorites
@@ -221,10 +236,12 @@ int main(int argc, char* argv[])
           {
             cout << "Here's your current favorite members: " << endl;
             ht.printFavoriteMember();
+            cout << endl;
           }
           else
           {
             cout << "You currently have no favorite member to delete!" << endl;
+            cout << endl;
             break;
           }
           cout << "Please insert the member you want to delete: ";
@@ -235,12 +252,14 @@ int main(int argc, char* argv[])
           {
             cout << "Yay! Here's the updated list of your current favorite member(s)!" << endl;
             ht.printFavoriteMember();
+            cout << endl;
           }
 
           if (ht.numofFavM() == 0)
           {
             cout << "You deleted EVERYTHING!!!!!" << endl;
           }
+          cout << endl;
           break;
         case 8:
           //quiz
@@ -249,17 +268,19 @@ int main(int argc, char* argv[])
           cin.ignore();
           getline(cin,memberN);
           ht.quiz(memberN);
+          cout << endl;
           break;
         case 9:
           if (ht.numofFavG() == 0)
           {
-            cout << "Oops! You currently have no favorite GROUP!" << endl;
+            cout << "Oops! You currently have no favorite GROUPS!" << endl;
           }
 
           else
           {
             ht.printFavoriteGroup();
           }
+          cout << endl;
           break;
 
         case 10:
@@ -272,11 +293,16 @@ int main(int argc, char* argv[])
           {
             ht.printFavoriteMember();
           }
-            break;
+
+          cout << endl;
+          break;
 
         case 11:
         // quit
-          cout << "POP POP POP KPOP POP! GOODBYE!" << endl;
+        cout << right << setw(105) << endl;
+          cout << " (^･o･^)ﾉ” POP POP POP KPOP POP! GOODBYE! (^･o･^)ﾉ” " << endl;
+          cout << endl;
+          cout << endl;
         //cat?
           exit(0);
         default:
