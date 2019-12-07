@@ -567,7 +567,7 @@ void HashTable:: quiz (string idolname)
       }
     }
 
-    int typeofquestion = randomizer(3);
+    int typeofquestion = randomizer(4);
     int other = randomizer(2);
     int taller = stoi(wrong->height);
     string answer;
@@ -740,58 +740,64 @@ void HashTable:: quiz (string idolname)
 
       break;
 
-    //case 4:
-    //   cout <<  "What group is " << right->memberName << " in?"<< endl;
-    //
-    //   if (other == 1)
-    //   {
-    //     cout << "first" << endl;
-    //     cout << "a. " << (table[placeholder])->groupName << endl;
-    //
-    //     wrongholder = randomizer(tableSize);
-    //     while (wrongholder -1 == placeholder)
-    //     {
-    //       wrongholder = randomizer(tableSize);
-    //     }
-    //     cout << "b. " << (table[wrongholder-1])->groupName << endl;
-    //     cout << "Answer: ";
-    //     cin >> answer;
-    //
-    //     if (answer == "a" || answer == "A")
-    //     {
-    //       cout << "Correct! (:" << endl;
-    //     }
-    //     else
-    //     {
-    //       cout << "Wrong! ):<" << endl;
-    //     }
-    //   }
-    //
-    //   else
-    //   {
-    //     cout << "second" << endl;
-    //     wrongholder = randomizer(tableSize);
-    //     while (wrongholder -1 == placeholder)
-    //     {
-    //       wrongholder = randomizer(tableSize);
-    //     }
-    //     cout << "a. " << (table[wrongholder-1])->groupName << endl;
-    //     cout << "b. " << (table[placeholder])->groupName << endl;
-    //
-    //     cout << "Answer: ";
-    //     cin >> answer;
-    //
-    //     if (answer == "b" || answer == "B")
-    //     {
-    //       cout << "Correct! (:" << endl;
-    //     }
-    //     else
-    //     {
-    //       cout << "Wrong! ):<" << endl;
-    //     }
-    //   }
-    //   break;
-    //
+      case 4:
+        cout <<  "What group is " << right->memberName << " in?"<< endl;
+
+        if (other == 1)
+       {
+     //     cout << "first" << endl;
+
+            if (trials == trials2)
+            {
+              trials2 = "BTS";
+              if (trials == "BTS")
+              {
+                trials2 = "NCT 127";
+              }
+            }
+          cout << "a. " << trials << endl;
+          cout << "b. " << trials2 << endl;
+          cout << "Answer (a/b): ";
+          cin >> answer;
+
+          if (answer == "a" || answer == "A")
+          {
+            cout << "Correct! (:" << endl;
+          }
+          else
+          {
+            cout << "Wrong! ):<" << endl;
+          }
+       }
+
+       else
+       {
+
+             if (trials == trials2)
+             {
+               trials2 = "BTS";
+               if (trials == "BTS")
+               {
+                 trials2 = "NCT 127";
+               }
+             }
+         cout << "a. " <<trials2 << endl;
+         cout << "b. " << trials << endl;
+
+         cout << "Answer: ";
+         cin >> answer;
+
+         if (answer == "b" || answer == "B")
+         {
+           cout << "Correct! (:" << endl;
+         }
+         else
+         {
+           cout << "Wrong! ):<" << endl;
+         }
+       }
+       break;
+
     }
   }
   else
