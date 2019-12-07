@@ -66,43 +66,12 @@ public:
     void deleteFavMember(string membername);
     void printFavoriteGroup();
     void printFavoriteMember();
-
+    int numofFavM();
+    int numofFavG();
     void quiz(string idolname);
     // WWE NEED DELETE FUNCTION
 
 
 };
-
-//favorite struct
-// struct bubble {
-//   int rank;
-//   string groupFavN;
-//   string memberFavN;
-// };
-//
-// class user
-// {
-//   public:
-//     user (int cap);
-//     ~user();
-//
-//     //heap functions
-//     int parent(int i);
-//     int right(int i);
-//
-//     void printSelect(int i);
-//     void printAll();
-//     void heapify(int i);
-//     void insertFavGroup(int rank, string groupFavN, string memberFavN);
-//     void deleteFavGroup(int rank);
-//   private:
-//     string username;
-//     //data type
-//
-//     //heap
-//     int *heapArr;
-//     int capacity;
-//     int currentSize;
-// }
 
 #endif
