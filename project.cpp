@@ -23,9 +23,6 @@ bool toLowerdouble(string input, string compare)
         output += tolower(input[i]);
         check += tolower(compare[i]);
     }
-
-    cout << output << " vs " << check << endl;
-
     if (check == output)
     {
       return true;
@@ -337,7 +334,7 @@ void HashTable:: printIndividual(string memberN)
     }
   }
 
-  cout << "!🅴 🆁 🆁 🅾 🆁 ! Idol not Found." << endl;
+  cout << "!🅴 🆁 🆁 O 🆁 ! Idol not Found." << endl;
 }
 
 void HashTable::addFavGroup(int rank, string groupName)
@@ -351,20 +348,22 @@ void HashTable::addFavGroup(int rank, string groupName)
     return;
   }
 
-  if (favoriteGroup.size() == 0 && rank != 1)
+  if (favoriteGroup.size() == 0)
   {
-    cout << "Oops! You do not have anything in here! We will put this at #1. Better Luck next time. Teehee" << endl;
+    if (rank != 1)
+    {
+      cout << "Oops! You do not have anything in here! We will put this at #1. Teehee" << endl;
+    }
     favoriteGroup.push_back(temp->groupName);
     return;
   }
 
-  if(rank == favoriteGroup.size()+1)
+  if(rank >= favoriteGroup.size()+1)
   {
-    favoriteGroup.push_back(temp->groupName);
-  }
-
-  else if(favoriteGroup.size() == 0)
-  {
+    if (rank > favoriteGroup.size()+1)
+    {
+      cout << "You do not have enough favorite group for it to be place at rank #" << rank << ". We will place " << temp->groupName << " at the end!" << endl;
+    }
     favoriteGroup.push_back(temp->groupName);
   }
 
@@ -377,16 +376,29 @@ void HashTable::addFavGroup(int rank, string groupName)
 
 void HashTable::deleteFavGroup(string groupname)
 {
+  if(favoriteGroup.size() == 0)
+  {
+    cout << "You have nothing to delete" << endl;
+    return;
+  }
 
   for (int i =0; i < favoriteGroup.size(); i++)
   {
     if (toLowerdouble(groupname, favoriteGroup[i]))
     {
       favoriteGroup.erase(favoriteGroup.begin() + i);
-      break;
+      return;
     }
   }
+
+  cout << "Your input was invalid. Group does not exist within your favorites!" << endl;
 }
+
+int HashTable:: numofFavG()
+{
+  return favoriteGroup.size();
+}
+
 
 void HashTable::addFavMember(int rank, string memberName)
 {
@@ -401,14 +413,22 @@ void HashTable::addFavMember(int rank, string memberName)
       {
         if (toLowerdouble(memberName, m->memberName) == true)
         {
-
-          if(rank == favoriteMember.size()+1)
+          if(favoriteMember.size() == 0)
           {
+            if (rank !=1)
+            {
+              cout << "Oops! You do not have anything in here! We will put this at #1. Teehee" << endl;
+            }
             favoriteMember.push_back(m->memberName);
+            return;
           }
 
-          else if(favoriteMember.size() == 0)
+          if(rank >= favoriteMember.size()+1)
           {
+            if(rank >favoriteMember.size())
+            {
+              cout << "You do not have enough favorite group for it to be place at rank #" << rank << ". We will place " << m->memberName << " at the end!" << endl;
+            }
             favoriteMember.push_back(m->memberName);
           }
 
@@ -428,24 +448,33 @@ void HashTable::addFavMember(int rank, string memberName)
     }
   }
 
-  cout << "!🅴 🆁 🆁 🅾 🆁 ! Idol not Found." << endl;
+  cout << "!🅴 🆁 🆁 O 🆁 ! Idol not Found." << endl;
 
 }
 
 void HashTable::deleteFavMember(string membername)
 {
+  if(favoriteMember.size() == 0)
+  {
+    return;
+  }
   for (int i =0; i < favoriteMember.size(); i++)
   {
     if (toLowerdouble(membername, favoriteMember[i]))
     {
       favoriteMember.erase(favoriteMember.begin() + i);
-      break;
+      return;
     }
   }
+  cout << "Your input was invalid. Group does not exist within your favorites!" << endl;
 }
 void HashTable:: printFavoriteMember()
 {
-  cout <<"Rank" << endl;
+  if(favoriteMember.size() == 0)
+  {
+    return;
+  }
+  cout <<"--- RANKING --- " << endl;
   for (int i =0; i < favoriteMember.size(); i++)
   {
     cout << i +1 << ". " << favoriteMember[i] << endl;
@@ -454,11 +483,21 @@ void HashTable:: printFavoriteMember()
 
 void HashTable:: printFavoriteGroup()
 {
-  cout <<"Rank" << endl;
+  if (favoriteGroup.size() == 0)
+  {
+    return;
+  }
+
+  cout <<"--- RANKINGS ---" << endl;
   for (int i =0; i < favoriteGroup.size(); i++)
   {
     cout << i +1 << ". " << favoriteGroup[i] << endl;
   }
+}
+
+int HashTable:: numofFavM()
+{
+  return favoriteMember.size();
 }
 //herlper function
 int randomizer(int num)
@@ -469,6 +508,8 @@ int randomizer(int num)
 void HashTable:: quiz (string idolname)
 {
   // cout << "start quiz " << endl;
+  int placeholder =0;
+  int wrongholder;
   if(searchMember(idolname))
   {
 
@@ -477,10 +518,10 @@ void HashTable:: quiz (string idolname)
     member* right;
     member* wrong;
     int wrongchoice =-1;
-    for (int i =0; i < tableSize; i++)
-    {
+  for (int i =0; i < tableSize; i++)
+  {
       group* n = table[i];
-
+      placeholder++;
       while(n != NULL)
       {
         member* m = n->head;
@@ -502,7 +543,7 @@ void HashTable:: quiz (string idolname)
 
         n = n->next;
       }
-    }
+  }
   // cout << "wwrong choice" << wrongchoice << endl;
     int num = randomizer(5);
     // cout << "numm:" << num << endl;
@@ -526,11 +567,14 @@ void HashTable:: quiz (string idolname)
       }
     }
 
-    int typeofquestion = 2;
+    int typeofquestion = randomizer(3);
     int other = randomizer(2);
     int taller = stoi(wrong->height);
     string answer;
+    string otherchoice;
+    int checkingchecking = 0;
 
+    cout << placeholder << " Place Holder" << endl;
     switch (typeofquestion)
     {
       case 1:
@@ -544,7 +588,7 @@ void HashTable:: quiz (string idolname)
         {
 
           cout << "a. " << right->height << endl;
-          cout << "b. " << taller  << endl;
+          cout << "b. " << taller << " cm"  << endl;
 
           cout << "Answer: ";
           cin >> answer;
@@ -619,10 +663,139 @@ void HashTable:: quiz (string idolname)
           }
         }
         break;
+      case 3:
+        cout << "What is " << right->memberName << "'s position" << endl;
+        if (other == 1)
+        {
+
+          cout << "a. " << right->position << endl;
+          if (right->position == wrong->position)
+          {
+            otherchoice = "Main Rapper";
+            checkingchecking =1;
+          }
+
+          if (right->position == "Main Rapper" && otherchoice == "Main Rapper")
+          {
+            otherchoice = "Main Dancer";
+          }
+          if (checkingchecking == 0)
+          {
+            cout << "b. " << wrong->position << endl;
+          }
+          else
+          {
+            cout << "b. " << otherchoice << endl;
+          }
+
+          cout << "Answer: ";
+          cin >> answer;
+
+          if (answer == "a" || answer == "A")
+          {
+            cout << "Correct! (:" << endl;
+          }
+          else
+          {
+            cout << "Wrong! ):<" << endl;
+          }
+
+        }
+      else
+      {
+        if (right->position == wrong->position)
+        {
+          otherchoice = "Main Rapper";
+          checkingchecking =1;
+        }
+
+        if (right->position == "Main Rapper" && otherchoice == "Main Rapper")
+        {
+          otherchoice = "Main Dancer";
+        }
+        if (checkingchecking == 0)
+        {
+          cout << "a. " << wrong->position << endl;
+        }
+        else
+        {
+          cout << "a. " << otherchoice << endl;
+        }
+
+        cout << "b. " << right->position << endl;
+
+        cout << "Answer: ";
+        cin >> answer;
+
+        if (answer == "b" || answer == "B")
+        {
+          cout << "Correct! (:" << endl;
+        }
+        else
+        {
+          cout << "Wrong! ):<" << endl;
+        }
+
+      }
+
+      break;
+
+    //case 4:
+    //   cout <<  "What group is " << right->memberName << " in?"<< endl;
+    //
+    //   if (other == 1)
+    //   {
+    //     cout << "first" << endl;
+    //     cout << "a. " << (table[placeholder])->groupName << endl;
+    //
+    //     wrongholder = randomizer(tableSize);
+    //     while (wrongholder -1 == placeholder)
+    //     {
+    //       wrongholder = randomizer(tableSize);
+    //     }
+    //     cout << "b. " << (table[wrongholder-1])->groupName << endl;
+    //     cout << "Answer: ";
+    //     cin >> answer;
+    //
+    //     if (answer == "a" || answer == "A")
+    //     {
+    //       cout << "Correct! (:" << endl;
+    //     }
+    //     else
+    //     {
+    //       cout << "Wrong! ):<" << endl;
+    //     }
+    //   }
+    //
+    //   else
+    //   {
+    //     cout << "second" << endl;
+    //     wrongholder = randomizer(tableSize);
+    //     while (wrongholder -1 == placeholder)
+    //     {
+    //       wrongholder = randomizer(tableSize);
+    //     }
+    //     cout << "a. " << (table[wrongholder-1])->groupName << endl;
+    //     cout << "b. " << (table[placeholder])->groupName << endl;
+    //
+    //     cout << "Answer: ";
+    //     cin >> answer;
+    //
+    //     if (answer == "b" || answer == "B")
+    //     {
+    //       cout << "Correct! (:" << endl;
+    //     }
+    //     else
+    //     {
+    //       cout << "Wrong! ):<" << endl;
+    //     }
+    //   }
+    //   break;
+    //
     }
   }
   else
   {
-    cout << "!🅴 🆁 🆁 🅾 🆁 ! Idol not Found." << endl;
+    cout << "!🅴 🆁 🆁 O 🆁 ! Idol not Found." << endl;
   }
 }
