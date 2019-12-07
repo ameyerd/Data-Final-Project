@@ -510,6 +510,9 @@ void HashTable:: quiz (string idolname)
   // cout << "start quiz " << endl;
   int placeholder =0;
   int wrongholder;
+  string trials;
+  string trials2;
+
   if(searchMember(idolname))
   {
 
@@ -518,10 +521,11 @@ void HashTable:: quiz (string idolname)
     member* right;
     member* wrong;
     int wrongchoice =-1;
+    int y =0;
   for (int i =0; i < tableSize; i++)
   {
       group* n = table[i];
-      placeholder++;
+
       while(n != NULL)
       {
         member* m = n->head;
@@ -533,7 +537,9 @@ void HashTable:: quiz (string idolname)
             while(wrongchoice == i || wrongchoice == -1)
             {
               wrongchoice = randomizer(tableSize);
+
             }
+            trials = n->groupName;
 
             right = m;
           }
@@ -543,6 +549,7 @@ void HashTable:: quiz (string idolname)
 
         n = n->next;
       }
+
   }
   // cout << "wwrong choice" << wrongchoice << endl;
     int num = randomizer(5);
@@ -561,20 +568,22 @@ void HashTable:: quiz (string idolname)
           wrong = m;
           m = m->n;
           counter++;
+          trials2 = n->groupName;
         }
 
         n = n->next;
       }
     }
 
-    int typeofquestion = randomizer(4);
-    int other = randomizer(2);
+    int typeofquestion = 4;
+    int other = randomizer(3);
     int taller = stoi(wrong->height);
     string answer;
     string otherchoice;
     int checkingchecking = 0;
 
-    cout << placeholder << " Place Holder" << endl;
+
+    //cout << placeholder << " Place Holder" << endl;
     switch (typeofquestion)
     {
       case 1:
@@ -589,10 +598,8 @@ void HashTable:: quiz (string idolname)
 
           cout << "a. " << right->height << endl;
           cout << "b. " << taller << " cm"  << endl;
-
-          cout << "Answer: ";
+          cout << "Answer (a/b): ";
           cin >> answer;
-
           if (answer == "a" || answer == "A")
           {
             cout << "Correct! (:" << endl;
@@ -610,7 +617,6 @@ void HashTable:: quiz (string idolname)
 
           cout << "Answer: ";
           cin >> answer;
-
           if (answer == "b" || answer == "B")
           {
             cout << "Correct! (:" << endl;
@@ -632,9 +638,8 @@ void HashTable:: quiz (string idolname)
 
           cout << "a. " << right->birthday << endl;
           cout << "b. " << wrong->birthday << endl;
-          cout << "Answer: ";
+          cout << "Answer (a/b): ";
           cin >> answer;
-
           if (answer == "a" || answer == "A")
           {
             cout << "Correct! (:" << endl;
@@ -650,9 +655,8 @@ void HashTable:: quiz (string idolname)
           cout << "a. " << wrong->birthday << endl;
           cout << "b. " << right->birthday << endl;
 
-          cout << "Answer: ";
+          cout << "Answer (a/b): ";
           cin >> answer;
-
           if (answer == "b" || answer == "B")
           {
             cout << "Correct! (:" << endl;
@@ -688,9 +692,8 @@ void HashTable:: quiz (string idolname)
             cout << "b. " << otherchoice << endl;
           }
 
-          cout << "Answer: ";
+          cout << "Answer (a/b): ";
           cin >> answer;
-
           if (answer == "a" || answer == "A")
           {
             cout << "Correct! (:" << endl;
@@ -724,7 +727,7 @@ void HashTable:: quiz (string idolname)
 
         cout << "b. " << right->position << endl;
 
-        cout << "Answer: ";
+        cout << "Answer (a/b): ";
         cin >> answer;
 
         if (answer == "b" || answer == "B")
@@ -737,6 +740,7 @@ void HashTable:: quiz (string idolname)
         }
 
       }
+
 
       break;
 
@@ -798,7 +802,9 @@ void HashTable:: quiz (string idolname)
        }
        break;
 
+
     }
+  
   }
   else
   {
