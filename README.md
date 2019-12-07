@@ -1,5 +1,5 @@
-#CSCI 2270: Data Structures Final Project
-##Project Summary:
+# CSCI 2270: Data Structures Final Project
+## Project Summary:
 The following code is a catalogue of famous K-Pop groups and idols. From the main menu, the user will be able to see:
 ```
 1. The list of all the famous K-Pop idol groups
@@ -15,20 +15,20 @@ The following code is a catalogue of famous K-Pop groups and idols. From the mai
 11. Quit
 ```
 
-###How to Run:
+### How to Run:
 To compile use these commands:
 ```
 g++ -std=c++11 kpop.hpp kpop.cpp kpopDriver.cpp
 ```
-###To run:
+### To run:
 ```
 ./a.out idols.csv
 ```
-##Dependencies:
+## Dependencies:
 Uses basic/standard c++ libraries. No third party content needed.
 
-##Group Members:
+## Group Members:
 Amey Erdenebileg & Vananh Le
 
-##Open issues/bugs:
+## Open issues/bugs:
 No issues or bugs currently.
