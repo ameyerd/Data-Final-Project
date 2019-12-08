@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <ctime>
-#include "project.hpp"
+#include "kpop.hpp"
 
 using namespace std;
 // this function is for case-sensitive input from the user
