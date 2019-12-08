@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <ctime>
-#include "project.hpp"
+#include "kpop.hpp"
 
 using namespace std;
 
